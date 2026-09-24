@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Twite Library - 1,847 étudiants</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,-apple-system}
+body{background:#164e5c;min-height:100vh}
+.auth-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px}
+.card{background:#fff;border-radius:30px;padding:24px;width:100%;max-width:380px;box-shadow:0 20px 50px rgba(0,0,0,.4);color:#000}
+.logo{text-align:center}
+.banner{background:#FFD700;color:#000;font-weight:900;font-size:11px;padding:12px;border-radius:14px;text-align:center;margin:16px 0;line-height:1.3}
+input,select{width:100%;padding:13px;background:#f7f7f7;border:1px solid #e5e5e5;border-radius:12px;margin-bottom:10px;font-size:14px}
+.btn{width:100%;background:#164e5c;color:#fff;padding:16px;border-radius:999px;font-weight:900;border:none;font-size:16px;cursor:pointer}
+.link{text-align:center;font-size:13px;margin-top:12px}
+.link span{color:#164e5c;font-weight:800;text-decoration:underline;cursor:pointer}
+.app{display:none;min-height:100vh;background:#fff;color:#000}
+.top{position:sticky;top:0;z-index:40;background:#fff;display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid #eee}
+.badge{position:absolute;top:-6px;right:-6px;background:#ef4444;color:#fff;font-size:10px;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900}
+.marquee{background:#FFD700;color:#000;font-weight:900;font-size:12px;padding:9px;text-align:center}
+.menu{position:fixed;inset:0;top:57px;background:#f3f4f6;z-index:35;display:none;padding:12px;overflow:auto}
+.menu .box{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+.menu button.item{width:100%;display:flex;justify-content:space-between;padding:16px;border:none;background:#fff;border-bottom:1px solid #f0f0f0;text-align:left;font-size:15px}
+.notif{position:fixed;right:8px;top:64px;width:92%;max-width:380px;background:#fff;box-shadow:0 15px 35px rgba(0,0,0,.2);border-radius:18px;padding:14px;z-index:50;display:none;color:#000}
+.n{padding:12px;border-radius:12px;margin:8px 0;border:1px solid #f0f0f0}
+.n.echec{background:#fef2f2} .n.reussi{background:#f0fdf4} .n.nouveau{background:#fefce8}
+</style>
+</head>
+<body>
+
+<!-- AUTH AVANT TOUT -->
+<div id="auth" class="auth-wrap">
+<div class="card">
+<div class="logo"><div style="font-size:56px">📚</div><h1 style="font-size:32px;font-weight:900">Twite Library</h1><p id="sub" style="font-size:13px;color:#555;margin-top:4px">1,847 students already registered</p></div>
+<div class="banner">WA KUWA KASHO MUKWENU KABESHA MPUNGU ATUKWASHE</div>
+
+<div id="reg">
+<input id="r_name" placeholder="Nom complet">
+<input id="r_wa" placeholder="WhatsApp +243...">
+<input id="r_univ" placeholder="Université ex: UNILU">
+<select id="r_level"><option>L1</option><option>L2</option><option>L3</option><option>M1</option><option>M2</option></select>
+<input id="r_pass" type="password" placeholder="Créer un mot de passe">
+<button class="btn" onclick="enter()">Create my account →</button>
+<p class="link">Already have account? <span onclick="toLogin(true)">Login</span></p>
+</div>
+
+<div id="log" style="display:none">
+<input id="l_wa" placeholder="WhatsApp or Email">
+<input id="l_pass" type="password" placeholder="Enter password">
+<div style="display:flex;justify-content:space-between;font-size:12px;margin:8px 0 14px"><label><input type="checkbox"> Remember me</label><span style="text-decoration:underline;color:#164e5c">Forgot password?</span></div>
+<button class="btn" onclick="enter()">Enter Twite →</button>
+<p class="link">No account? <span onclick="toLogin(false)">Create one</span></p>
+<p style="font-size:11px;text-align:center;margin-top:14px;color:#888">Support 📧 leparcon85@gmail.com 📞 +243828803861</p>
+</div>
+</div>
+</div>
+
+<!-- APP APRES AUTH -->
+<div id="app" class="app">
+<div class="top"><span style="font-size:24px;cursor:pointer" onclick="toggleMenu()">☰</span><b>Twite Library</b><span style="position:relative;font-size:22px;cursor:pointer" onclick="toggleNotif()">🔔<span id="count" class="badge">3</span></span></div>
+<div class="marquee">🔥 WA KUWA KASHO MUKWENU KABESHA MPUNGU ATUKWASHE - 5.000 FC par cours 🔥</div>
+
+<div id="menu" class="menu">
+<div class="box">
+<button class="item" onclick="showPage('dash')">📊 Tableau de bord <span style="color:#999;font-size:11px">Dashboard</span></button>
+<button class="item" onclick="showPage('comment')">💬 Commentaires <span style="color:#999;font-size:11px">Comments</span></button>
+<button class="item" onclick="showPage('aide')">❓ Aide <span style="color:#999;font-size:11px">Help</span></button>
+<button class="item" onclick="showPage('users')">👥 1,847 utilisateurs <span style="color:#999;font-size:11px">Users</span></button>
+</div>
+<div class="box" style="margin-top:12px;padding:12px">
+<a href="mailto:leparcon85@gmail.com" style="display:block;padding:8px;color:#000;text-decoration:none">📧 leparcon85@gmail.com</a>
+<a href="tel:+243828803861" style="display:block;padding:8px;color:#000;text-decoration:none">📞 +243828803861</a>
+<a href="https://wa.me/243828803861" target="_blank" style="display:block;background:#25D366;color:#fff;text-align:center;padding:12px;border-radius:999px;font-weight:900;text-decoration:none;margin-top:8px">WhatsApp Direct</a>
+</div>
+<div class="box" style="margin-top:12px;padding:14px">
+<div style="display:flex;justify-content:space-between;align-items:center"><span>🌐 Langue</span><div style="background:#eee;border-radius:999px;padding:2px"><button onclick="setLang('FR')" id="btnFR" style="padding:6px 14px;border-radius:999px;border:none;background:#3b82f6;color:#fff;font-weight:700">FR</button><button onclick="setLang('EN')" id="btnEN" style="padding:6px 14px;border-radius:999px;border:none;background:transparent">EN</button></div></div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:12px;border-top:1px solid #eee"><span>🎨 Thème</span><div style="background:#eee;border-radius:999px;padding:2px"><button onclick="setTheme('Light')" id="btnLight" style="padding:6px 10px;border-radius:999px;border:none;background:#facc15">☀️</button><button onclick="setTheme('Dark')" id="btnDark" style="padding:6px 10px;border-radius:999px;border:none;background:transparent">🌙</button></div></div>
+</div>
+<button onclick="logout()" style="width:100%;margin-top:14px;background:#ef4444;color:#fff;padding:14px;border-radius:999px;border:none;font-weight:800">Déconnexion / Logout</button>
+</div>
+
+<div id="notif" class="notif">
+<b>🔔 Notifications</b>
+<div class="n nouveau"><b>🆕 Droit Minier L3 ajouté en Faculté de Droit</b><br><span style="font-size:11px;color:#666">5 min - <span style="color:#2563eb;font-weight:800">Voir</span></span></div>
+<div class="n reussi"><b>✅ Paiement confirmé 5.000 FC - PDF débloqué</b><br><span style="font-size:11px;color:#666">10 min - <span style="color:#2563eb;font-weight:800">Ouvrir PDF</span></span></div>
+<div class="n echec"><b>❌ Échec confirmation paiement - réessaye</b><br><span style="font-size:11px;color:#666">2h - <span style="color:#ef4444;font-weight:800">Réessayer WhatsApp</span></span></div>
+<button onclick="document.getElementById('count').innerText='0'" style="width:100%;border:none;background:transparent;color:#2563eb;font-size:12px;margin-top:6px">Marquer tout comme lu</button>
+</div>
+
+<div style="padding:20px">
+<div id="p-dash"><h1 style="font-weight:900;font-size:24px">2,450 cours disponibles</h1><p style="margin-top:6px;color:#666">Bienvenue! Cherche ton cours, paye 5.000 FC via WhatsApp +243828803861</p><div style="margin-top:16px;background:#f7f7f7;padding:16px;border-radius:16px">📘 Droit Civil L1 - UNILU <button style="float:right;background:#164e5c;color:#fff;border:none;padding:6px 14px;border-radius:999px;font-weight:700">5.000 FC</button></div></div>
+<div id="p-comment" style="display:none"><h2 style="font-weight:900">Commentaires</h2><div style="background:#f7f7f7;padding:12px;border-radius:12px;margin-top:12px">⭐⭐⭐⭐⭐ "Super app" - Jean UNILU</div></div>
+<div id="p-aide" style="display:none"><h2 style="font-weight:900">Aide</h2><p style="margin-top:12px;line-height:1.6">1. Crée compte<br>2. Cherche cours<br>3. Clique 5.000 FC<br>4. Paye sur WhatsApp +243828803861<br>5. Reçois PDF + notif 🔔 ✅</p></div>
+<div id="p-users" style="display:none"><h2 style="font-weight:900">Communauté Twite</h2><p style="font-size:48px;font-weight:900;color:#164e5c;margin-top:12px">1,847</p><p>étudiants déjà inscrits</p></div>
+</div>
+</div>
+
+<script>
+function toLogin(b){reg.style.display=b?'none':'block';log.style.display=b?'block':'none';sub.innerText=b?'Welcome back!':'1,847 students already registered';}
+function enter(){auth.style.display='none';app.style.display='block';}
+function logout(){app.style.display='none';auth.style.display='flex';menu.style.display='none';}
+function toggleMenu(){menu.style.display=menu.style.display==='block'?'none':'block';notif.style.display='none';}
+function toggleNotif(){notif.style.display=notif.style.display==='block'?'none':'block';menu.style.display='none';}
+function showPage(p){['dash','comment','aide','users'].forEach(x=>document.getElementById('p-'+x).style.display=x===p?'block':'none');menu.style.display='none';}
+function setLang(l){document.getElementById('btnFR').style.background=l==='FR'?'#3b82f6':'transparent';document.getElementById('btnFR').style.color=l==='FR'?'#fff':'#000';document.getElementById('btnEN').style.background=l==='EN'?'#3b82f6':'transparent';document.getElementById('btnEN').style.color=l==='EN'?'#fff':'#000';}
+function setTheme(t){document.body.style.background=t==='Dark'?'#000':'#164e5c';app.style.background=t==='Dark'?'#000':'#fff';app.style.color=t==='Dark'?'#fff':'#000';document.getElementById('btnLight').style.background=t==='Light'?'#facc15':'transparent';document.getElementById('btnDark').style.background=t==='Dark'?'#333':'transparent';}
+</script>
+</body>
+</html>
+
+Tel est le code complet
